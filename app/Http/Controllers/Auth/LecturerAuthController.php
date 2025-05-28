@@ -62,9 +62,12 @@ class LecturerAuthController extends Controller
         return redirect()->route('lecturer.dashboard')->with('success', 'Password changed successfully');
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
         Auth::guard('lecturer')->logout();
-        return redirect()->route('lecturer.login');
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/');
     }
+
 } 

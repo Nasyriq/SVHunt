@@ -63,11 +63,14 @@ class StudentAuthController extends Controller
         return redirect()->route('student.dashboard')->with('success', 'Password changed successfully');
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
         Auth::guard('student')->logout();
-        return redirect()->route('student.login');
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/');
     }
+
 
     public function dashboard()
     {
