@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Student;
 use App\Models\Task;
+use App\Models\Topic;
 
 class StudentAuthController extends Controller
 {
@@ -84,7 +85,7 @@ class StudentAuthController extends Controller
                      ->get();
 
         // You'll need to implement these counts based on your Topic and Appointment models
-        $pendingTopicCount = 0; // Replace with actual count
+        $pendingTopicCount = Topic::where('student_id', $student->id)->where('status', 'pending')->count();
         $pendingAppointmentCount = 0; // Replace with actual count
 
         return view('student.dashboard', compact('tasks', 'pendingTopicCount', 'pendingAppointmentCount'));

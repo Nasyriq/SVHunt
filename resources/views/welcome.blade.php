@@ -121,67 +121,50 @@
         }
     </style>
 </head>
-<body>
-    <div class="logo-container">
-        <img src="{{ asset('images/innovisory.png') }}" alt="Innovisory Logo">
-        
-    </div>
-    <!-- Hero Section -->
-    <section class="hero-section flex items-center justify-center">
-        <div class="text-center text-white relative z-10">
-            <div class="welcome-text">
-                <h1 class="text-6xl font-bold mb-6" data-aos="fade-down">Welcome to Innovisory!</h1>
-                <p class="text-2xl mb-16" data-aos="fade-up">Your Academic Advisory Management Solution</p>
-            </div>
-            
-            <!-- Login Cards -->
-            <div class="container mx-auto px-4">
-                <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                    <!-- Student Login -->
-                    <div class="login-card p-8 text-center" data-aos="fade-up" data-aos-delay="100">
-                        <div class="icon-wrapper">
-                            <i class="fas fa-user-graduate"></i>
-                        </div>
-                        <h3 class="text-2xl font-bold mb-4 text-gray-800">Student Portal</h3>
-                        <p class="text-gray-600 mb-8">Access your academic advisory services and schedule meetings with your advisor.</p>
-                        <a href="/student/login" class="login-btn text-white inline-block hover:shadow-lg">
-                            Student Login
-                        </a>
-                    </div>
-
-                    <!-- Lecturer Login -->
-                    <div class="login-card p-8 text-center" data-aos="fade-up" data-aos-delay="200">
-                        <div class="icon-wrapper">
-                            <i class="fas fa-chalkboard-teacher"></i>
-                        </div>
-                        <h3 class="text-2xl font-bold mb-4 text-gray-800">Lecturer Portal</h3>
-                        <p class="text-gray-600 mb-8">Manage your advisees and maintain records of advisory sessions.</p>
-                        <a href="/lecturer/login" class="login-btn text-white inline-block hover:shadow-lg">
-                            Lecturer Login
-                        </a>
-                    </div>
-
-                    <!-- Coordinator Login -->
-                    <div class="login-card p-8 text-center" data-aos="fade-up" data-aos-delay="300">
-                        <div class="icon-wrapper">
-                            <i class="fas fa-users-cog"></i>
-                        </div>
-                        <h3 class="text-2xl font-bold mb-4 text-gray-800">Coordinator Portal</h3>
-                        <p class="text-gray-600 mb-8">Oversee the advisory system and manage lecturer-student assignments.</p>
-                        <a href="/coordinator/login" class="login-btn text-white inline-block hover:shadow-lg">
-                            Coordinator Login
-                        </a>
-                    </div>
+<body class="bg-blue-200 min-h-screen flex flex-col justify-between">
+    <div class="flex flex-col items-center justify-center flex-grow w-full pt-12">
+        <img src="{{ asset('images/innovisory.png') }}" alt="Innovisory Logo" class="mx-auto mb-8" style="height: 150px; width: auto;">
+        <h1 class="text-5xl font-bold text-center mb-2">Welcome to Innovisory!</h1>
+        <p class="text-xl text-center mb-8">Your Academic Advisory Management Solution</p>
+        <!-- Menu Cards Section -->
+        <div class="flex flex-col md:flex-row items-center justify-center gap-8 mb-16 w-full max-w-5xl">
+            <!-- Student Portal Card -->
+            <div class="bg-white rounded-2xl shadow-lg p-8 flex flex-col items-center w-80 mb-8 md:mb-0">
+                <div class="icon-wrapper">
+                    <i class="fas fa-user-graduate"></i>
                 </div>
+                <h3 class="text-2xl font-bold mb-4 text-gray-800">Student Portal</h3>
+                <p class="text-gray-600 mb-8">Access your academic advisory services and schedule meetings with your advisor.</p>
+                <a href="/student/login" class="login-btn text-white inline-block hover:shadow-lg">
+                    Student Login
+                </a>
+            </div>
+            <!-- Lecturer Portal Card -->
+            <div class="bg-white rounded-2xl shadow-lg p-8 flex flex-col items-center w-80 mb-8 md:mb-0">
+                <div class="icon-wrapper">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-4 text-gray-800">Lecturer Portal</h3>
+                <p class="text-gray-600 mb-8">Manage your advisees and maintain records of advisory sessions.</p>
+                <a href="/lecturer/login" class="login-btn text-white inline-block hover:shadow-lg">
+                    Lecturer Login
+                </a>
+            </div>
+            <!-- Coordinator Portal Card -->
+            <div class="bg-white rounded-2xl shadow-lg p-8 flex flex-col items-center w-80">
+                <div class="icon-wrapper">
+                    <i class="fas fa-users-cog"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-4 text-gray-800">Coordinator Portal</h3>
+                <p class="text-gray-600 mb-8">Oversee the advisory system and manage lecturer-student assignments.</p>
+                <a href="/coordinator/login" class="login-btn text-white inline-block hover:shadow-lg">
+                    Coordinator Login
+                </a>
             </div>
         </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-6">
-        <div class="container mx-auto px-4 text-center">
-            <p>&copy; 2024 Innovisory System. All rights reserved.</p>
-        </div>
+    </div>
+    <footer class="w-full bg-white text-center py-4 shadow-inner mt-8">
+        <span class="text-gray-600">&copy; {{ date('Y') }} Innovisory. All rights reserved.</span>
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>

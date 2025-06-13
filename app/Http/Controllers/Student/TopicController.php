@@ -28,10 +28,22 @@ class TopicController extends Controller
     public function index()
     {
         $topics = Topic::where('student_id', Auth::guard('student')->id())
-                      ->with('lecturer')
-                      ->latest()
-                      ->get();
-        
+            ->with('lecturer')
+            ->get()
+            ->sortBy([
+                // Pending first, then approved/rejected
+                fn($a, $b) => $a->status === 'pending' && $b->status !== 'pending' ? -1 : ($a->status !== 'pending' && $b->status === 'pending' ? 1 : 0),
+                // For pending, latest first
+                fn($a, $b) => $a->status === 'pending' && $b->status === 'pending'
+                    ? $b->created_at <=> $a->created_at
+                    : 0,
+                // For non-pending, oldest first
+                fn($a, $b) => $a->status !== 'pending' && $b->status !== 'pending'
+                    ? $a->created_at <=> $b->created_at
+                    : 0,
+            ])
+            ->values();
+
         $lecturers = Lecturer::all();
         $researchGroups = $this->researchGroups;
         
