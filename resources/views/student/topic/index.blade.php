@@ -114,18 +114,20 @@
                                   class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"></textarea>
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-gray-700">Research Area</label>
-                        <input type="text" name="research_area" required
-                               class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200">
+                        <label class="block text-sm font-medium text-gray-700">Research Group</label>
+                        <select name="research_group" id="researchGroup" required
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200">
+                            <option value="">Select a research group</option>
+                            @foreach($researchGroups as $code => $name)
+                            <option value="{{ $code }}">{{ $code }} - {{ $name }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700">Supervisor</label>
-                        <select name="lecturer_id" required
+                        <select name="lecturer_id" id="lecturerSelect" required
                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200">
                             <option value="">Select a supervisor</option>
-                            @foreach($lecturers as $lecturer)
-                            <option value="{{ $lecturer->id }}">{{ $lecturer->name }} ({{ $lecturer->research_group }})</option>
-                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -198,7 +200,7 @@
                             class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200">
                         <option value="">Select a supervisor</option>
                         @foreach($lecturers as $lecturer)
-                        <option value="{{ $lecturer->id }}">{{ $lecturer->name }} ({{ $lecturer->research_group }})</option>
+                        <option value="{{ $lecturer->id }}">{{ $lecturer->name }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -225,6 +227,39 @@ function viewFeedback(feedback) {
     document.getElementById('feedbackContent').textContent = feedback;
     document.getElementById('feedbackModal').classList.remove('hidden');
 }
+
+// Pass all lecturers to JS
+const lecturers = @json($lecturers);
+
+document.addEventListener('DOMContentLoaded', function() {
+    const researchGroupSelect = document.getElementById('researchGroup');
+    const lecturerSelect = document.getElementById('lecturerSelect');
+
+    function populateLecturers(group) {
+        lecturerSelect.innerHTML = '<option value="">Select a supervisor</option>';
+        if (!group) return;
+        lecturers.forEach(lecturer => {
+            if (lecturer.research_group === group) {
+                const option = document.createElement('option');
+                option.value = lecturer.id;
+                option.textContent = lecturer.name;
+                lecturerSelect.appendChild(option);
+            }
+        });
+    }
+
+    researchGroupSelect.addEventListener('change', function() {
+        populateLecturers(this.value);
+    });
+
+    // Optionally, populate on page load if old value exists
+    @if(old('research_group'))
+        populateLecturers(@json(old('research_group')));
+        @if(old('lecturer_id'))
+            lecturerSelect.value = @json(old('lecturer_id'));
+        @endif
+    @endif
+});
 
 function editTopic(id) {
     // Fetch topic data

@@ -10,6 +10,21 @@ use Illuminate\Support\Facades\Auth;
 
 class TopicController extends Controller
 {
+    private $researchGroups = [
+        'CSRG' => 'Computer System Research Group',
+        'VISIC' => 'Virtual Simulation & Computing',
+        'MIRG' => 'Machine Intelligence Research Group',
+        'Cy-SIG' => 'Cybersecurity Interest Group',
+        'SERG' => 'Software Engineering Research Group',
+        'KECL' => 'Knowledge Engineering & Computational Linguistic',
+        'DSSim' => 'Data Science & Simulation Modeling',
+        'DBIS' => 'Database Technology & Information System',
+        'EDU-TECH' => 'Educational Technology',
+        'ISP' => 'Image Signal Processing',
+        'CNRG' => 'Computer Network Research Group',
+        'SCORE' => 'Soft Computing & Optimization'
+    ];
+
     public function index()
     {
         $topics = Topic::where('student_id', Auth::guard('student')->id())
@@ -18,8 +33,9 @@ class TopicController extends Controller
                       ->get();
         
         $lecturers = Lecturer::all();
+        $researchGroups = $this->researchGroups;
         
-        return view('student.topic.index', compact('topics', 'lecturers'));
+        return view('student.topic.index', compact('topics', 'lecturers', 'researchGroups'));
     }
 
     public function store(Request $request)
@@ -27,16 +43,22 @@ class TopicController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
-            'research_area' => 'required|string|max:255',
-            'lecturer_id' => 'required|exists:lecturers,id'
+            'lecturer_id' => 'required|exists:lecturers,id',
+            'research_group' => 'required|string|in:' . implode(',', array_keys($this->researchGroups))
         ]);
+
+        // Verify that the selected lecturer belongs to the selected research group
+        $lecturer = Lecturer::findOrFail($request->lecturer_id);
+        if ($lecturer->research_group !== $request->research_group) {
+            return back()->with('error', 'The selected supervisor does not belong to the selected research group.');
+        }
 
         $topic = Topic::create([
             'student_id' => Auth::guard('student')->id(),
             'lecturer_id' => $request->lecturer_id,
             'title' => $request->title,
             'description' => $request->description,
-            'research_area' => $request->research_area,
+            'research_area' => $request->research_group,
             'status' => 'pending'
         ]);
 

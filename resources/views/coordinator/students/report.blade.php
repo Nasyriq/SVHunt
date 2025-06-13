@@ -78,7 +78,11 @@
 
     <div class="header">
         <h1>Students Report</h1>
-        <p>Generated on: {{ date('Y-m-d H:i:s') }}</p>
+@php
+    use Carbon\Carbon;
+    $malaysiaNow = Carbon::now('Asia/Kuala_Lumpur')->format('Y-m-d H:i:s');
+@endphp
+        <p>Generated on: {{ $malaysiaNow }}</p>
     </div>
 
     <table>
