@@ -81,11 +81,10 @@
                 <button type="submit" class="login-btn w-full text-white py-3 px-6 rounded-lg font-medium">
                     Login
                 </button>
+                <div class="mt-6 text-center">
+                    <a href="/" class="text-blue-600 hover:text-blue-800">Back to Home</a>
+                </div>
             </form>
-
-            <div class="mt-6 text-center">
-                <a href="/" class="text-blue-600 hover:text-blue-800">Back to Home</a>
-            </div>
         </div>
     </div>
 </body>
