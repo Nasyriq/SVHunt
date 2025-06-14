@@ -28,7 +28,7 @@ class TopicController extends Controller
     public function index()
     {
         $topics = Topic::where('student_id', Auth::guard('student')->id())
-            ->with('lecturer')
+                      ->with('lecturer')
             ->get()
             ->sortBy([
                 // Pending first, then approved/rejected
@@ -43,7 +43,7 @@ class TopicController extends Controller
                     : 0,
             ])
             ->values();
-
+        
         $lecturers = Lecturer::all();
         $researchGroups = $this->researchGroups;
         

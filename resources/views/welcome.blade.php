@@ -130,39 +130,39 @@
         <div class="flex flex-col md:flex-row items-center justify-center gap-8 mb-16 w-full max-w-5xl">
             <!-- Student Portal Card -->
             <div class="bg-white rounded-2xl shadow-lg p-8 flex flex-col items-center w-80 mb-8 md:mb-0">
-                <div class="icon-wrapper">
-                    <i class="fas fa-user-graduate"></i>
-                </div>
-                <h3 class="text-2xl font-bold mb-4 text-gray-800">Student Portal</h3>
-                <p class="text-gray-600 mb-8">Access your academic advisory services and schedule meetings with your advisor.</p>
-                <a href="/student/login" class="login-btn text-white inline-block hover:shadow-lg">
-                    Student Login
-                </a>
-            </div>
+                        <div class="icon-wrapper">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4 text-gray-800">Student Portal</h3>
+                        <p class="text-gray-600 mb-8">Access your academic advisory services and schedule meetings with your advisor.</p>
+                        <a href="/student/login" class="login-btn text-white inline-block hover:shadow-lg">
+                            Student Login
+                        </a>
+                    </div>
             <!-- Lecturer Portal Card -->
             <div class="bg-white rounded-2xl shadow-lg p-8 flex flex-col items-center w-80 mb-8 md:mb-0">
-                <div class="icon-wrapper">
-                    <i class="fas fa-chalkboard-teacher"></i>
-                </div>
-                <h3 class="text-2xl font-bold mb-4 text-gray-800">Lecturer Portal</h3>
-                <p class="text-gray-600 mb-8">Manage your advisees and maintain records of advisory sessions.</p>
-                <a href="/lecturer/login" class="login-btn text-white inline-block hover:shadow-lg">
-                    Lecturer Login
-                </a>
-            </div>
+                        <div class="icon-wrapper">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4 text-gray-800">Lecturer Portal</h3>
+                        <p class="text-gray-600 mb-8">Manage your advisees and maintain records of advisory sessions.</p>
+                        <a href="/lecturer/login" class="login-btn text-white inline-block hover:shadow-lg">
+                            Lecturer Login
+                        </a>
+                    </div>
             <!-- Coordinator Portal Card -->
             <div class="bg-white rounded-2xl shadow-lg p-8 flex flex-col items-center w-80">
-                <div class="icon-wrapper">
-                    <i class="fas fa-users-cog"></i>
+                        <div class="icon-wrapper">
+                            <i class="fas fa-users-cog"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4 text-gray-800">Coordinator Portal</h3>
+                        <p class="text-gray-600 mb-8">Oversee the advisory system and manage lecturer-student assignments.</p>
+                        <a href="/coordinator/login" class="login-btn text-white inline-block hover:shadow-lg">
+                            Coordinator Login
+                        </a>
+                    </div>
                 </div>
-                <h3 class="text-2xl font-bold mb-4 text-gray-800">Coordinator Portal</h3>
-                <p class="text-gray-600 mb-8">Oversee the advisory system and manage lecturer-student assignments.</p>
-                <a href="/coordinator/login" class="login-btn text-white inline-block hover:shadow-lg">
-                    Coordinator Login
-                </a>
             </div>
-        </div>
-    </div>
     <footer class="w-full bg-white text-center py-4 shadow-inner mt-8">
         <span class="text-gray-600">&copy; {{ date('Y') }} Innovisory. All rights reserved.</span>
     </footer>
