@@ -60,6 +60,9 @@
                             {{ $task->start_date->format('d M Y, H:i') }} - 
                             {{ $task->end_date->format('d M Y, H:i') }}
                         </p>
+                        <p class="text-sm font-medium mt-1" style="color: {{ $task->deadline_status['color'] }}">
+                            {{ $task->duration }} ({{ $task->deadline_status['text'] }})
+                        </p>
                         @if($task->description)
                         <p class="text-gray-600 mt-1">{{ $task->description }}</p>
                         @endif

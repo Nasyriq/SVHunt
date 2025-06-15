@@ -38,6 +38,9 @@
                             {{ $task->start_date->format('d M Y, H:i') }} - 
                             {{ $task->end_date->format('d M Y, H:i') }}
                         </p>
+                        <p class="text-sm font-medium mt-1" style="color: {{ $task->deadline_status['color'] }}">
+                            {{ $task->duration }} ({{ $task->deadline_status['text'] }})
+                        </p>
                     </div>
                     <div class="flex items-center space-x-2">
                         <span class="text-sm font-medium">{{ $task->progress_percentage }}%</span>

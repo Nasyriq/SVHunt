@@ -19,7 +19,7 @@
     </div>
 
     <!-- Summary Cards -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
         <!-- Pending Topics Card -->
         <div class="bg-white rounded-lg shadow-md p-6">
             <div class="flex items-center">
@@ -45,6 +45,20 @@
                 </div>
             </div>
         </div>
+
+        <!-- Quota Balance Card -->
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <div class="flex items-center">
+                <div class="p-3 rounded-full bg-green-100 text-green-500">
+                    <i class="fas fa-users text-2xl"></i>
+                </div>
+                <div class="ml-4">
+                    <h3 class="text-lg font-semibold text-gray-700">Supervisee Quota</h3>
+                    <p class="text-3xl font-bold text-gray-800">{{ $quotaInfo['current'] }}/{{ $quotaInfo['max'] }}</p>
+                    <p class="text-sm text-gray-600 mt-1">{{ $quotaInfo['remaining'] }} slots remaining</p>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Timeframe Section -->
@@ -60,14 +74,24 @@
                             {{ $task->start_date->format('d M Y') }} - 
                             {{ $task->end_date->format('d M Y') }}
                         </p>
+                        <p class="text-sm font-medium mt-1" style="color: {{ $task->deadline_status['color'] }}">
+                            {{ $task->duration }} ({{ $task->deadline_status['text'] }})
+                        </p>
                         @if($task->description)
                         <p class="text-gray-600 mt-1">{{ $task->description }}</p>
                         @endif
                     </div>
-                    <span class="inline-block px-2 py-1 text-sm rounded-full"
-                          style="background-color: {{ $task->color }}20; color: {{ $task->color }}">
-                        {{ $task->status }}
-                    </span>
+                    <div class="text-right">
+                        <span class="inline-block px-2 py-1 text-sm rounded-full"
+                              style="background-color: {{ $task->color }}20; color: {{ $task->color }}">
+                            {{ $task->status }}
+                        </span>
+                        <p class="text-sm font-medium mt-1">{{ $task->progress_percentage }}% Complete</p>
+                    </div>
+                </div>
+                <div class="mt-2 w-full bg-gray-200 rounded-full h-2">
+                    <div class="h-2 rounded-full" 
+                         style="width: {{ $task->progress_percentage }}%; background-color: {{ $task->color }}"></div>
                 </div>
             </div>
             @empty

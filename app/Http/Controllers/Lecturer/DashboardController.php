@@ -32,12 +32,21 @@ class DashboardController extends Controller
                     })
                     ->orderBy('start_date')
                     ->get();
+
+        // Get quota information
+        $quota = $lecturer->quota;
+        $quotaInfo = [
+            'current' => $quota ? $quota->current_supervisees : 0,
+            'max' => $quota ? $quota->max_supervisees : 0,
+            'remaining' => $quota ? ($quota->max_supervisees - $quota->current_supervisees) : 0
+        ];
         
         return view('lecturer.dashboard', compact(
             'lecturer',
             'pendingTopicsCount',
             'pendingAppointmentsCount',
-            'tasks'
+            'tasks',
+            'quotaInfo'
         ));
     }
 } 

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Topic;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Quota;
 
 class LecturerTopicController extends Controller
 {
@@ -27,10 +28,26 @@ class LecturerTopicController extends Controller
             'feedback' => 'required|string'
         ]);
 
+        $oldStatus = $topic->status;
+
         $topic->update([
             'status' => $request->status,
             'feedback' => $request->feedback
         ]);
+
+        if ($request->status === 'approved' && $oldStatus !== 'approved') {
+            $quota = Quota::where('lecturer_id', $topic->lecturer_id)->first();
+            if ($quota) {
+                $quota->increment('current_supervisees');
+            }
+        }
+
+        if ($request->status === 'rejected' && $oldStatus === 'approved') {
+            $quota = Quota::where('lecturer_id', $topic->lecturer_id)->first();
+            if ($quota && $quota->current_supervisees > 0) {
+                $quota->decrement('current_supervisees');
+            }
+        }
 
         return back()->with('success', 'Topic ' . $request->status . ' successfully.');
     }
